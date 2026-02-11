@@ -95,6 +95,59 @@ body {
 .site-header-top-section-right {
   margin-left: auto;
   flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+/* Hamburger: hidden on desktop */
+.menu-toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: #2d3748;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.menu-toggle:hover {
+  background: #f7fafc;
+  color: #1a202c;
+}
+
+.menu-toggle-inner {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 22px;
+  height: 18px;
+}
+
+.menu-toggle-bar {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: currentColor;
+  border-radius: 1px;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.menu-toggle.is-open .menu-toggle-bar:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.menu-toggle.is-open .menu-toggle-bar:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-toggle.is-open .menu-toggle-bar:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
 }
 
 .site-branding .custom-logo {
@@ -657,13 +710,41 @@ a:hover {
     padding: 1rem;
   }
 
-  .site-header-inner {
-    flex-direction: column;
-    align-items: flex-start;
+  .site-top-header-inner-wrap {
+    flex-wrap: nowrap;
+    align-items: center;
+    min-height: 48px;
+  }
+
+  .site-header-top-section-left,
+  .site-header-top-section-right {
+    align-items: center;
+  }
+
+  .site-header-top-section-right {
+    flex-shrink: 0;
+  }
+
+  .menu-toggle {
+    display: flex;
+  }
+
+  .main-navigation .primary-menu-container {
+    display: none;
+    width: 100%;
+    margin-top: 0.5rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid #e2e8f0;
+  }
+
+  .main-navigation.nav-open .primary-menu-container {
+    display: block;
   }
 
   .main-navigation .menu {
     width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
   }
 
   .site-top-footer-inner-wrap {

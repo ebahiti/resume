@@ -1,15 +1,20 @@
 import { Outlet, NavLink, useLocation } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { initGlobal } from './dom-init';
 import { SEO } from './components/SEO';
 import { OptimizedImage } from './components/OptimizedImage';
 
 export function Layout() {
   const location = useLocation();
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     initGlobal();
   }, []);
+
+  useEffect(() => {
+    setMenuOpen(false);
+  }, [location.pathname]);
 
   return (
     <div className="site wp-site-blocks" id="wrapper">
@@ -33,7 +38,21 @@ export function Layout() {
                           </div>
                         </div>
                         <div className="site-header-top-section-right site-header-section">
-                          <nav id="site-navigation" className="main-navigation" role="navigation" aria-label="Primary">
+                          <button
+                            type="button"
+                            className={'menu-toggle' + (menuOpen ? ' is-open' : '')}
+                            aria-expanded={menuOpen}
+                            aria-label="Toggle menu"
+                            aria-controls="primary-menu"
+                            onClick={() => setMenuOpen(!menuOpen)}
+                          >
+                            <span className="menu-toggle-inner" aria-hidden>
+                              <span className="menu-toggle-bar" />
+                              <span className="menu-toggle-bar" />
+                              <span className="menu-toggle-bar" />
+                            </span>
+                          </button>
+                          <nav id="site-navigation" className={'main-navigation' + (menuOpen ? ' nav-open' : '')} role="navigation" aria-label="Primary">
                             <div className="primary-menu-container">
                               <ul id="primary-menu" className="menu">
                                 <li className={'menu-item' + (location.pathname === '/' ? ' current-menu-item' : '')}>
