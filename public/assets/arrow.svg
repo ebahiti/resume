@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="180" height="32" viewBox="0 0 180 32" fill="none">
+  <!-- Thick horizontal line -->
+  <rect x="0" y="10" width="110" height="12" rx="2" fill="#0ea5e9"/>
+  <!-- Arrowhead (same thickness) -->
+  <path fill="#0ea5e9" d="M110 6 L160 16 L110 26 Z"/>
+</svg>

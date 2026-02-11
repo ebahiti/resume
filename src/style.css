@@ -1,0 +1,895 @@
+/* Reset and base to match WordPress/Kadence layout */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #1e1e1e;
+}
+
+/* Skip link (accessibility) */
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 0;
+  padding: 0.5rem 1rem;
+  background: #fff;
+  border: 1px solid #ccc;
+  z-index: 100000;
+  transition: top 0.2s;
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
+.screen-reader-text {
+  clip: rect(1px, 1px, 1px, 1px);
+  position: absolute !important;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+}
+
+.screen-reader-text:focus {
+  clip: auto;
+  height: auto;
+  width: auto;
+  padding: 0.5rem 1rem;
+  background: #fff;
+  border: 1px solid #ccc;
+}
+
+/* Site container (shared header/main/footer width) */
+.site-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* Header – transparent at top, blurry opaque when scrolled */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: transparent;
+  border-bottom: 1px solid transparent;
+  transition: background 0.25s ease, border-color 0.25s ease, backdrop-filter 0.25s ease;
+}
+
+.site-header.header-scrolled {
+  background: rgba(255, 255, 255, 0.75);
+  border-bottom-color: rgba(226, 232, 240, 0.8);
+  backdrop-filter: saturate(180%) blur(12px);
+  -webkit-backdrop-filter: saturate(180%) blur(12px);
+}
+
+.site-header-wrap {
+  padding: 0.75rem 0;
+}
+
+.site-header-inner {
+  width: 100%;
+}
+
+/* Logo left, nav right – flex on the row that has both sections */
+.site-top-header-inner-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  width: 100%;
+}
+
+.site-header-top-section-left {
+  flex-shrink: 0;
+}
+
+.site-header-top-section-right {
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+.site-branding .custom-logo {
+  display: block;
+  height: 48px;
+  width: auto;
+  max-width: 200px;
+  object-fit: contain;
+}
+
+.main-navigation .menu {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 0.5rem;
+}
+
+.main-navigation .menu-item a {
+  padding: 0.4em 0.75em;
+  color: #2d3748;
+  text-decoration: none;
+  font-size: 0.95rem;
+}
+
+.main-navigation .menu-item a:hover,
+.main-navigation .menu-item.current-menu-item a {
+  color: #2b6cb0;
+}
+
+.main-navigation .header-button {
+  background: #2b6cb0;
+  color: #fff !important;
+  border-radius: 4px;
+  font-weight: 500;
+}
+
+.main-navigation .header-button:hover {
+  background: #215387;
+  text-decoration: none;
+}
+
+/* Main content – full width of site-container */
+#inner-wrap {
+  min-height: 50vh;
+}
+
+.content-container {
+  padding: 0 1.5rem;
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.content-wrap,
+.entry-content-wrap,
+.entry-content {
+  padding: 0;
+  width: 100%;
+}
+
+/* Footer */
+.site-footer {
+  background: #f7fafc;
+  border-top: 1px solid #e2e8f0;
+  margin-top: 3rem;
+}
+
+.site-top-footer-wrap {
+  padding: 2rem 0;
+}
+
+.site-top-footer-inner-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+.site-bottom-footer-wrap {
+  padding: 1rem 0;
+  border-top: 1px solid #e2e8f0;
+}
+
+.site-footer .footer-navigation .menu {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 0.5rem 1.25rem;
+}
+
+.site-footer .footer-navigation .menu a {
+  color: #4a5568;
+  text-decoration: none;
+  font-size: 0.95rem;
+}
+
+.site-footer .footer-navigation .menu a:hover {
+  color: #2b6cb0;
+}
+
+.site-info .footer-html-inner {
+  font-size: 0.9rem;
+  color: #718096;
+}
+
+.site-info .footer-html-inner p {
+  margin: 0;
+}
+
+/* Scroll to top */
+.kadence-scroll-to-top {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #2b6cb0;
+  color: #fff;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  z-index: 99;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s, visibility 0.2s;
+}
+
+.kadence-scroll-to-top.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.kadence-scroll-to-top:hover {
+  background: #215387;
+  color: #fff;
+  text-decoration: none;
+}
+
+.kadence-scroll-to-top .kadence-svg-iconset {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.kadence-scroll-to-top svg {
+  width: 22px;
+  height: 24px;
+}
+
+/* Container matching typical Kadence/block theme – single width for all sections */
+.resume-page {
+  max-width: 1100px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+  box-sizing: border-box;
+}
+
+.resume-page .kb-row-layout-wrap,
+.resume-page .kt-row-column-wrap,
+.resume-page .kt-inside-inner-col {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Hero section */
+/* Shared section card – white rounded container, same as hero */
+.section-card {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+  padding: 2.5rem 2rem;
+  margin-bottom: 2.5rem;
+  overflow: hidden;
+}
+
+/* Fly in from below on scroll (About Me, Skills and Expertise) */
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(120px);
+  transition: opacity 0.35s ease-out, transform 0.4s ease-out;
+}
+
+.scroll-reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Hero card – extends section-card with flex layout for text + portrait */
+.hero-card {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  gap: 2rem;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+  padding: 2.5rem 2rem;
+  margin-bottom: 2.5rem;
+  overflow: hidden;
+}
+
+.hero-card-text {
+  flex: 1 1 280px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: left;
+}
+
+.hero-greeting {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #2d3748;
+  margin: 0 0 0.75rem;
+  letter-spacing: 0.02em;
+}
+
+.hero-divider {
+  border: 0;
+  border-top: 2px solid #2d3748;
+  width: 48px;
+  margin: 0 0 1rem;
+  align-self: flex-start;
+}
+
+.hero-name {
+  font-size: 2.25rem;
+  font-weight: 600;
+  color: #1a202c;
+  margin: 0 0 0.5rem;
+  line-height: 1.2;
+}
+
+.hero-title {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: #2d3748;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.hero-card-portrait {
+  flex: 0 0 auto;
+  width: 280px;
+  max-width: 100%;
+  min-height: 280px;
+  background: #4a5568;
+  border-radius: 45% 45% 50% 50% / 55% 55% 45% 45%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-card-portrait .portrait-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  border-radius: inherit;
+  margin: 0;
+}
+
+.has-medium-font-size {
+  font-size: 1.25rem;
+}
+
+.has-large-font-size {
+  font-size: 2rem;
+  margin: 0.25rem 0;
+}
+
+.kt-divider {
+  border: 0;
+  border-top: 1px solid #ccc;
+  width: 60px;
+  margin: 1rem auto;
+}
+
+.wp-block-group p {
+  margin: 0.5rem 0;
+}
+
+/* Two-column row (hero: text + portrait, Experience, Education) */
+.kb-row-layout-wrap {
+  margin-bottom: 2.5rem;
+  width: 100%;
+}
+
+.kt-row-column-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.kt-has-2-columns>* {
+  flex: 1 1 280px;
+  min-width: 0;
+}
+
+/* Single-column sections use full container width so they align with Experience/Education */
+.kt-has-1-columns .kt-inside-inner-col {
+  max-width: 100%;
+}
+
+.kt-inside-inner-col {
+  padding: 0.25rem 0;
+}
+
+/* Portrait */
+.wp-block-image {
+  margin: 0;
+}
+
+.wp-block-image img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.portrait-img {
+  border-radius: 100px;
+  width: 384px;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+/* Quote section */
+#quote-container {
+  font-style: italic;
+  margin: 0.5rem 0;
+  min-height: 1.5em;
+}
+
+/* Section headings */
+h2.wp-block-heading {
+  font-size: 1.5rem;
+  margin: 0 0 1rem;
+}
+
+h3.wp-block-heading {
+  font-size: 1.35rem;
+  margin: 0 0 1rem;
+}
+
+.has-text-align-center {
+  text-align: center;
+}
+
+/* About Me two columns */
+.about-image-col img {
+  width: 232px;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Skills: heading + arrow (substantial spacing, arrow centered, bright blue) */
+.skills-heading-col .wp-block-heading {
+  margin-bottom: 2rem;
+}
+
+.skills-arrow-wrap {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.skills-arrow {
+  width: 180px;
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Four-column expertise cards – fly in on scroll with ~0.5s stagger */
+.expertise-card {
+  opacity: 0;
+  transform: translateY(80px);
+  transition: opacity 0.45s ease-out, transform 0.45s ease-out;
+}
+
+.expertise-cards-section.cards-visible .expertise-card {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.expertise-cards-section .expertise-card:nth-child(1) {
+  transition-delay: 0s;
+}
+
+.expertise-cards-section .expertise-card:nth-child(2) {
+  transition-delay: 0.5s;
+}
+
+.expertise-cards-section .expertise-card:nth-child(3) {
+  transition-delay: 1s;
+}
+
+.expertise-cards-section .expertise-card:nth-child(4) {
+  transition-delay: 1.5s;
+}
+
+.kt-has-4-columns {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.kt-has-4-columns .wp-block-image img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.kt-has-4-columns .wp-block-image {
+  margin-bottom: 0.75rem;
+}
+
+.kt-has-4-columns p.has-medium-font-size {
+  margin-bottom: 0.5rem;
+}
+
+.kt-has-4-columns p:last-child {
+  margin-bottom: 0;
+  font-size: 0.95rem;
+}
+
+/* Lists */
+.wp-block-list {
+  margin: 1rem 0;
+  padding-left: 1.5rem;
+}
+
+.wp-block-list li {
+  margin-bottom: 0.75rem;
+}
+
+/* Experience / Education two-column layout */
+.experience-image-col img,
+.education-image-col img {
+  max-width: 100%;
+  height: auto;
+}
+
+.education-image-col img {
+  width: 315px;
+  max-width: 100%;
+}
+
+/* Portfolio gallery – 3×2 grid, uniform tiles, images fill (cover) */
+.wp-block-gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  list-style: none;
+  margin: 1rem 0;
+  padding: 0;
+}
+
+.wp-block-gallery figure {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Fixed aspect-ratio box so every tile is same size; image fills and crops to fit */
+.wp-block-gallery .portfolio-tile-img {
+  display: block;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: #e8e8e8;
+}
+
+.wp-block-gallery .portfolio-tile-img img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: center;
+}
+
+.wp-block-gallery .wp-element-caption {
+  font-size: 0.85rem;
+  color: #555;
+  margin-top: 0.25rem;
+  padding: 0;
+  flex-shrink: 0;
+}
+
+.wp-element-caption {
+  font-size: 0.85rem;
+  color: #555;
+  margin-top: 0.25rem;
+}
+
+/* Links */
+a {
+  color: #0073aa;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive: stack columns and header nav on small screens */
+@media (max-width: 782px) {
+  .section-card {
+    padding: 2rem 1.5rem;
+  }
+
+  .hero-card {
+    flex-direction: column;
+    padding: 2rem 1.5rem;
+    text-align: center;
+  }
+
+  .hero-card-text {
+    text-align: center;
+  }
+
+  .hero-divider {
+    align-self: center;
+  }
+
+  .hero-card-portrait {
+    width: 240px;
+    min-height: 240px;
+    margin: 0 auto;
+  }
+
+  .kt-has-2-columns,
+  .kt-has-4-columns {
+    flex-direction: column;
+  }
+
+  .kt-has-4-columns {
+    grid-template-columns: 1fr;
+  }
+
+  .portrait-img {
+    width: 100%;
+    max-width: 384px;
+  }
+
+  .resume-page {
+    padding: 1rem;
+  }
+
+  .site-header-inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .main-navigation .menu {
+    width: 100%;
+  }
+
+  .site-top-footer-inner-wrap {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .wp-block-gallery {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .wp-block-gallery {
+    grid-template-columns: 1fr;
+  }
+
+  .main-navigation .menu {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .site-branding .custom-logo {
+    max-width: 160px;
+    height: 40px;
+  }
+}
+
+/* Contact page (cloned from minutes-marketing; colors aligned to resume theme) */
+.page--contact {
+  background: #fff;
+}
+
+.main-content--contact {
+  max-width: 560px;
+  padding: 2rem 0 4rem;
+}
+
+.contact-hero {
+  text-align: left;
+  margin-bottom: 2.5rem;
+}
+
+.contact-title {
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: #1a202c;
+  margin: 2rem 0 0.5rem;
+  letter-spacing: -0.02em;
+}
+
+.contact-lead {
+  font-size: 1.125rem;
+  color: #4a5568;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.contact-lead + .contact-lead {
+  margin-top: 0.5rem;
+}
+
+.contact-divider {
+  border: none;
+  border-top: 1px solid #e2e8f0;
+  margin: 1.75rem 0 1.25rem;
+}
+
+.contact-reasons-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #1a202c;
+  margin: 0 0 0.75rem;
+  text-align: left;
+}
+
+.contact-reasons-list {
+  list-style: disc;
+  padding-left: 1.5rem;
+  margin: 0;
+  text-align: left;
+  color: #2d3748;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.contact-reasons-list li {
+  margin-bottom: 0.35rem;
+}
+
+.contact-card-wrap {
+  background: #fff;
+  border-radius: 16px;
+  padding: 2.25rem 2rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.06), 0 2px 4px -2px rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.contact-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.contact-form label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #2d3748;
+  letter-spacing: 0.01em;
+}
+
+.contact-form input,
+.contact-form textarea,
+.contact-form select {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  font: inherit;
+  font-size: 1rem;
+  color: #1a202c;
+  background: #fff;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.contact-form select {
+  cursor: pointer;
+  appearance: auto;
+}
+
+.contact-form input.error,
+.contact-form textarea.error,
+.contact-form select.error {
+  border-color: #dc2626;
+}
+
+.contact-form .error-message {
+  display: block;
+  font-size: 0.875rem;
+  color: #dc2626;
+  margin-top: 0.25rem;
+}
+
+.contact-form .error-alert {
+  padding: 0.75rem 1rem;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 10px;
+  color: #b91c1c;
+  font-size: 0.9375rem;
+}
+
+.contact-form .success-alert {
+  padding: 0.75rem 1rem;
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  border-radius: 10px;
+  color: #166534;
+  font-size: 0.9375rem;
+}
+
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+  color: #718096;
+}
+
+.contact-form input:hover,
+.contact-form textarea:hover,
+.contact-form select:hover {
+  border-color: #cbd5e1;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus,
+.contact-form select:focus {
+  outline: none;
+  border-color: #2b6cb0;
+  box-shadow: 0 0 0 3px rgba(43, 108, 176, 0.15);
+}
+
+.contact-form textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.contact-actions {
+  margin-top: 0.5rem;
+}
+
+.contact-submit {
+  display: inline-block;
+  padding: 0.875rem 1.75rem;
+  background: linear-gradient(135deg, #2b6cb0 0%, #215387 100%);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 2px 8px rgba(43, 108, 176, 0.35);
+}
+
+.contact-submit:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(43, 108, 176, 0.4);
+}
+
+.contact-submit:active {
+  transform: translateY(0);
+}
+
+@media (max-width: 768px) {
+  .contact-card-wrap {
+    padding: 1.75rem 1.25rem;
+  }
+
+  .contact-title {
+    font-size: 1.875rem;
+  }
+}
