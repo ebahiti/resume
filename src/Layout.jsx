@@ -46,7 +46,7 @@ export function Layout() {
                                   <NavLink to="/services">Services</NavLink>
                                 </li>
                                 <li className={'menu-item' + (location.pathname === '/contact' ? ' current-menu-item' : '')}>
-                                  <NavLink to="/contact" className="header-button button">Contact</NavLink>
+                                  <NavLink to="/contact">Contact</NavLink>
                                 </li>
                               </ul>
                             </div>
