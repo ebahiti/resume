@@ -52,7 +52,11 @@ export function initHomePage() {
     }
     function parseQuotes(text) {
       const straightQuotes = text.replace(/\u201C/g, '"').replace(/\u201D/g, '"');
-      const normalized = straightQuotes.replace(/\s+/g, ' ').trim();
+      const normalized = straightQuotes
+        .replace(/\u2013/g, '-')
+        .replace(/\u2014/g, '-')
+        .replace(/\s+/g, ' ')
+        .trim();
       const regex = /"([^"]*)"\s*-\s*([^"]+?)(?=\s*"|$)/g;
       const quotes = [];
       let m;
@@ -66,7 +70,7 @@ export function initHomePage() {
     function showFallback(msg) {
       container.textContent = msg;
     }
-    fetch(QUOTE_FILE_URL)
+    fetch(QUOTE_FILE_URL, { cache: 'no-store' })
       .then((res) => (res.ok ? res.text() : Promise.reject(new Error('File not found'))))
       .then((text) => {
         const quotes = parseQuotes(text);
