@@ -17,6 +17,7 @@ const CREDENTIAL_FILES = [
   '9_advanced_communication.webp',
   '10_reserve_funds.webp',
   '11_financial_audits.webp',
+  '12_advanced_fire.png',
 ].sort((a, b) => {
   const numA = parseInt(a.match(/^\d+/)?.[0] ?? '0', 10);
   const numB = parseInt(b.match(/^\d+/)?.[0] ?? '0', 10);
